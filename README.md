@@ -1,7 +1,16 @@
 # simple_api_server
 
-`fastapi` framework 기반으로 `sqlalchemy` 및 DI를 사용하여 simple한 API 서버 구축
+Based on `fastapi`, this is the source of building a simple API server using `sqlalchemy` and `DI`.
 
-github action을 이용해 CI/CD 작성하고 Container기반으로 배포
+Creating CI/CD using github action and distributing it based on container is also a goal to guide.
 
-초 간단한 명령으로 API sample test 환경을 구축하는 것을 목표로 함
+Aims to build an API sample test environment with ultra-simple commands
+
+# pre requirements
+* Install docker
+* Install docker-compose
+
+# Get started
+```
+docker-compose up -d
+```
