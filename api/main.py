@@ -17,6 +17,7 @@ def pageData():
 class Model(BaseModel):
   name: str
   phone: int
+  age: int
 
 # TODO: connect DB
 @app.post("/send")
