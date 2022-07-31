@@ -1,9 +1,15 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
+from typing import Optional
 
 app = FastAPI()
+
+fake_db = {
+    "foo": {"id": "foo", "title": "Foo", "description": "There goes my hero"},
+    "bar": {"id": "bar", "title": "Bar", "description": "The bartenders"},
+}
 
 # main page
 @app.get("/")
@@ -26,6 +32,24 @@ def pageSend(data: Model):
     print(data)
     return f"${data} has been sent"
 
+
+
+class Item(BaseModel):
+    id: str
+    title: str
+    description: Optional[str] = None
+
+@app.get("/items/{item_id}", response_model=Item)
+async def read_item(item_id: str):
+    return fake_db.get(item_id, None)
+
+@app.post("/items/", response_model=Item)
+async def create_item(item: Item):
+    if item.id in fake_db:
+        raise HTTPException(status_code=400, detail="Item already exists")
+
+    fake_db[item.id] = item
+    return item
 
 if __name__ == "__main__":
     # debug mode
