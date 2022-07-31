@@ -1,31 +1,31 @@
+import uvicorn
 from fastapi import FastAPI
-app = FastAPI()
-
+from pydantic import BaseModel
 from fastapi.responses import FileResponse
+
+app = FastAPI()
 
 # main page
 @app.get("/")
-def 작명():
+def pageIndex():
   return FileResponse('index.html')
 
 @app.get("/data")
-def 작명2():
+def pageData():
   return {'hello' : 1234}
 
-from pydantic import BaseModel
 class Model(BaseModel):
   name: str
   phone: int
 
-# DB접속하는 로직
+# TODO: connect DB
 @app.post("/send")
-def 작명4(data: Model):
-  # DB에서 꺼내는 로직
+def pageSend(data: Model):
+  # TODO: get DB
   print(data)
-  return f"${data} 전송완료"
+  return f"${data} has been sent"
 
-#@app.post("/send2")
-# async def 작명5(data: Model):
-#   await ?
-#   print(data)
-#   return '전송완료'
+
+if __name__ == "__main__":
+    # debug mode
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
