@@ -8,22 +8,23 @@ app = FastAPI()
 # main page
 @app.get("/")
 def pageIndex():
-  return FileResponse('index.html')
+    return FileResponse('index.html')
 
 @app.get("/data")
 def pageData():
-  return {'hello' : 1234}
+    return {'hello' : 1234}
 
 class Model(BaseModel):
-  name: str
-  phone: int
+    name: str
+    phone: int
+    age: int
 
 # TODO: connect DB
 @app.post("/send")
 def pageSend(data: Model):
-  # TODO: get DB
-  print(data)
-  return f"${data} has been sent"
+    # TODO: get DB
+    print(data)
+    return f"${data} has been sent"
 
 
 if __name__ == "__main__":
