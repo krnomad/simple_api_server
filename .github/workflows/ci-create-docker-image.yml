@@ -15,6 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the prod Docker image
-      run: docker build compose/fastapi --file Dockerfile --tag my-image-name:$(date +%s)
+      run: docker build . --file compose/fastapi/Dockerfile --tag my-image-name:$(date +%s)
     - name: Build the test Docker image
-      run: docker build compose/fastapi --file Dockerfile_dev --tag my-image-name-dev:$(date +%s)
+      run: docker build . --file compose/fastapi/Dockerfile_dev --tag my-image-name-dev:$(date +%s)
