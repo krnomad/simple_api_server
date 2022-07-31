@@ -1,0 +1,28 @@
+version: '3'
+
+volumes:
+  postgres_data: {}
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgres/data
+    environment:
+      - POSTGRES_DB=fastapi_sample
+      - POSTGRES_USER=user_sample
+      - POSTGRES_PASSWORD=secret_sample
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: ./compose/fastapi/Dockerfile
+    volumes:
+      - ./api:/api/
+    environment:
+      - FASTAPI_DB_HOST=db
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - 8081:8000
