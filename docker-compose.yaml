@@ -16,7 +16,7 @@ services:
   fastapi:
     build:
       context: .
-      dockerfile: ./compose/fastapi/Dockerfile
+      dockerfile: ./Dockerfile
     volumes:
       - ./api:/api/
     environment:
@@ -30,7 +30,7 @@ services:
   fastapi_debug:
     build:
       context: .
-      dockerfile: ./compose/fastapi/Dockerfile_dev
+      dockerfile: ./Dockerfile_dev
     volumes:
       - ./api:/api/
     environment:
